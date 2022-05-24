@@ -20,12 +20,31 @@ public class CourseController {
 	/*
 	 * endpoint used by gradebook service to transfer final course grades
 	 */
+	
 	@PutMapping("/course/{course_id}")
 	@Transactional
 	public void updateCourseGrades( @RequestBody CourseDTOG courseDTO, @PathVariable("course_id") int course_id) {
-		
+		System.out.println("	updateCourseGrades");
+				
 		//TODO  complete this method in homework 4
+		
+		//Receive the CourseDTOG data and 
+		//update enrollment table with course grades.
+		
+		for (CourseDTOG.GradeDTO x : courseDTO.grades) {
+			Enrollment enrollment = enrollmentRepository.findByEmailAndCourseId(
+					x.student_email, 
+					course_id);
+			
+			enrollment.setCourseGrade(x.grade);
+			enrollmentRepository.save(enrollment);
+		}
+		
+		
+		System.out.println("Received http message: " + courseDTO.toString() + " " + course_id);
+		
 		
 	}
 
+	
 }
