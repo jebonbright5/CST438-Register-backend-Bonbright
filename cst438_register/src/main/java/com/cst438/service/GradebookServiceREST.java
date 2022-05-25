@@ -33,7 +33,7 @@ public class GradebookServiceREST extends GradebookService {
 		System.out.println("	Sending message: " + msg);
 		
 		ResponseEntity<EnrollmentDTO> response = restTemplate.postForEntity(
-				gradebook_url + "/enrollment/",		//URL "http://localhost:8081/schedule"
+				gradebook_url + "/enrollment/",		//URL 
 				msg,								//Data
 				EnrollmentDTO.class);				//Return data type
 		
